@@ -129,5 +129,10 @@ def recipe(request, num):
         ],
         "link": "/recipe/2"
     }
-
-# Create your views here.
+    if (num == 1):
+        recipe = recipe1
+    elif (num == 2):
+        recipe = recipe2
+    else:
+        recipe = ""
+    return (request, 'recipe.html', recipe)

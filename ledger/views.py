@@ -28,7 +28,7 @@ def recipe_list(request):
                     "quantity": "1 packet"
                 }
             ],
-            "link": "/recipe/1"
+            "link": "list/1"
         },
         {
             "name": "Recipe 2",
@@ -62,7 +62,7 @@ def recipe_list(request):
                     "quantity": "1 kilo"
                 }
             ],
-            "link": "/recipe/2"
+            "link": "list/2"
         }
     ]
     }
@@ -71,6 +71,7 @@ def recipe_list(request):
 def recipe(request, num):
     recipe1 = {
         "name": "Recipe 1",
+        "number": "1",
         "ingredients": [
             {
                 "name": "tomato",
@@ -93,10 +94,11 @@ def recipe(request, num):
                 "quantity": "1 packet"
             }
         ],
-        "link": "/recipe/1"
+        "link": "ledger/recipes/list/1"
     }
     recipe2 = {
         "name": "Recipe 2",
+        "number": "2",
         "ingredients": [
             {
                 "name": "garlic",
@@ -127,12 +129,13 @@ def recipe(request, num):
                 "quantity": "1 kilo"
             }
         ],
-        "link": "/recipe/2"
+        "link": "ledger/recipes/list/2"
     }
     if (num == 1):
         recipe = recipe1
     elif (num == 2):
         recipe = recipe2
+        number = 2
     else:
         recipe = ""
     return render(request, 'recipe.html', recipe)

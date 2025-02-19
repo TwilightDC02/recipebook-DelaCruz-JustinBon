@@ -135,4 +135,4 @@ def recipe(request, num):
         recipe = recipe2
     else:
         recipe = ""
-    return (request, 'recipe.html', recipe)
+    return render(request, 'recipe.html', recipe)

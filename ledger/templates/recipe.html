@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
-{% block title %} Recipe Book {{ number }} {% endblock %}
+{% block title %} Recipe Book : {{number}} {% endblock %}
 {% block content %}
+    <h1>{{name}}</h1>
     <ul>
         {% for ingredient in ingredients %}
-            <li>{{ingredient}}</li>
+            <li>{{ingredient.name}} - {{ingredient.quantity}}</li>
         {% endfor %}
     </ul>
 {% endblock %}

@@ -1,0 +1,16 @@
+<!-- This file is an extension of the base.html file. This serves as the page that will display the chosen recipe's ingredients in detail.-->
+{% extends 'base.html' %}
+
+{% block title %} Recipe Book : {{number}} {% endblock %}
+
+{% block content %}
+
+    <h1>{{name}}</h1>
+
+    <ul>
+        {% for ingredient in ingredients %}
+            <li>{{ingredient.name}} - {{ingredient.quantity}}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

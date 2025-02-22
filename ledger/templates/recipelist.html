@@ -1,18 +1,14 @@
+<!-- This file is an extension of the base.html file. This serves as the "home" page of the ledger app, containing all of the recipes. -->
 {% extends 'base.html' %}
+
 {% block title %} Recipe Book Menu {% endblock %}
+
 {% block content %}
+
     <ol>
         {% for recipe in recipes %}
-            <li>
-                <a href="{{ recipe.link }}">{{ recipe.name }}</a>
-                <ul>
-                    {% for ingredient in recipe.ingredients %}
-                    <li>
-                        {{ingredient.name}} - {{ingredient.quantity}}
-                    </li>
-                    {% endfor %}
-                </ul>
-            </li>
+            <li> <a href="{{ recipe.link }}">{{ recipe.name }}</a> </li>
         {% endfor %}
     </ol>
+
 {% endblock %}

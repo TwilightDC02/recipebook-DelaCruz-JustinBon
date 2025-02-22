@@ -66,7 +66,7 @@ def recipe_list(request):
         }
     ]
     }
-    return render(request, 'recipelist.html', recipelist)
+    return render(request, 'recipe_list.html', recipelist)
 
 def recipe(request, recipe_num):
     recipe1 = {

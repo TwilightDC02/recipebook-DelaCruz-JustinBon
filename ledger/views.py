@@ -28,7 +28,7 @@ def recipe_list(request):
                     "quantity": "1 packet"
                 }
             ],
-            "link": "list/1"
+            "link": "recipe/1"
         },
         {
             "name": "Recipe 2",
@@ -62,7 +62,7 @@ def recipe_list(request):
                     "quantity": "1 kilo"
                 }
             ],
-            "link": "list/2"
+            "link": "recipe/2"
         }
     ]
     }
@@ -94,7 +94,7 @@ def recipe(request, num):
                 "quantity": "1 packet"
             }
         ],
-        "link": "ledger/recipes/list/1"
+        "link": "ledger/recipe/1"
     }
     recipe2 = {
         "name": "Recipe 2",
@@ -129,7 +129,7 @@ def recipe(request, num):
                 "quantity": "1 kilo"
             }
         ],
-        "link": "ledger/recipes/list/2"
+        "link": "ledger/recipe/2"
     }
     if (num == 1):
         recipe = recipe1

@@ -68,7 +68,7 @@ def recipe_list(request):
     }
     return render(request, 'recipelist.html', recipelist)
 
-def recipe(request, num):
+def recipe(request, recipe_num):
     recipe1 = {
         "name": "Recipe 1",
         "number": "1",
@@ -131,11 +131,10 @@ def recipe(request, num):
         ],
         "link": "ledger/recipe/2"
     }
-    if (num == 1):
+    if (recipe_num == 1):
         recipe = recipe1
-    elif (num == 2):
+    elif (recipe_num == 2):
         recipe = recipe2
-        number = 2
     else:
         recipe = ""
     return render(request, 'recipe.html', recipe)

@@ -20,6 +20,6 @@ class Recipe(models.Model):
         return reverse('recipe', args=[str(self.name)])
 
 class RecipeIngredient(models.Model):
-    Quantity = models.IntegerField()
+    Quantity = models.CharField(max_length=255)
     Ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, related_name='ingredient')
     Recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='recipe')

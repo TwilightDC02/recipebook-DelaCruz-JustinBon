@@ -4,6 +4,7 @@ from .models import *
 class RecipeIngredientReadOnlyInline(admin.TabularInline):
     model = RecipeIngredient
 
+    # Prevents unintentional edits to the recipe and/or quantity.
     readonly_fields = ['Recipe', 'Quantity']
 
 class RecipeIngredientEditableInline(admin.TabularInline):
@@ -14,6 +15,8 @@ class IngredientAdmin(admin.ModelAdmin):
 
     list_display = ('name',)
     search_fields = ('name',)
+    
+    # Allows for admin to view which recipes require the chosen ingredient and how much is needed.
     inlines = [RecipeIngredientReadOnlyInline, ]
 
 class RecipeAdmin(admin.ModelAdmin):
@@ -21,6 +24,8 @@ class RecipeAdmin(admin.ModelAdmin):
 
     list_display = ('name',)
     search_fields = ('name',)
+
+    # Allows for admin to modify the recipes by adding/deleting ingredients.
     inlines = [RecipeIngredientEditableInline, ]
 
 class RecipeIngredientAdmin(admin.ModelAdmin):

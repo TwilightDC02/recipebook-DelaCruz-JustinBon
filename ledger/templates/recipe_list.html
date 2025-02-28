@@ -5,6 +5,8 @@
 
 {% block content %}
 
+    <h1> Bon's Recipe Book </h1>
+
     <ol>
         {% for recipe in recipes %}
             <li> <a href="{{ recipe.get_absolute_url }}">{{ recipe }}</a> </li>

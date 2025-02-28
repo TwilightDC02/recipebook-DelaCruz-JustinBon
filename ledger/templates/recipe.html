@@ -5,11 +5,11 @@
 
 {% block content %}
 
-    <h1>Recipe Book: {{recipe.name}}</h1>
+    <h1> Recipe Book: {{recipe.name}} </h1>
 
     <ul>
         {% for ingredients in recipe.ingredients.all %}
-            <li> {{ingredients.Quantity}} {{ingredients.Ingredient}}</li>
+            <li> {{ingredients.Quantity}} {{ingredients.Ingredient}} </li>
         {% endfor %}
     </ul>
 

@@ -1,15 +1,15 @@
 <!-- This file is an extension of the base.html file. This serves as the page that will display the chosen recipe's ingredients in detail.-->
 {% extends 'base.html' %}
 
-{% block title %} Recipe Book : {{number}} {% endblock %}
+{% block title %} Recipe Book : {{recipe.name}} {% endblock %}
 
 {% block content %}
 
-    <h1>{{name}}</h1>
+    <h1> Recipe Book: {{recipe.name}} </h1>
 
     <ul>
-        {% for ingredient in ingredients %}
-            <li>{{ingredient.name}} - {{ingredient.quantity}}</li>
+        {% for ingredients in recipe.ingredients.all %}
+            <li> {{ingredients.Quantity}} {{ingredients.Ingredient}} </li>
         {% endfor %}
     </ul>
 

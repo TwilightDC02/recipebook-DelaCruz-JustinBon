@@ -21,3 +21,6 @@ urlpatterns = [
     path('ledger/', include('ledger.urls', namespace="ledger")),
     path('admin/', admin.site.urls),
 ]
+
+admin.site.site_title = "Bon's Recipebook Admin"
+admin.site.site_header = "Recipe Database"

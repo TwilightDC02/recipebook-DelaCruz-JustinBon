@@ -1,7 +1,12 @@
 from django.contrib import admin
 from .models import *
 
-class RecipeIngredientInline(admin.StackedInline):
+class RecipeIngredientReadOnlyInline(admin.TabularInline):
+    model = RecipeIngredient
+
+    readonly_fields = ['Recipe', 'Quantity']
+
+class RecipeIngredientEditableInline(admin.TabularInline):
     model = RecipeIngredient
 
 class IngredientAdmin(admin.ModelAdmin):
@@ -9,13 +14,14 @@ class IngredientAdmin(admin.ModelAdmin):
 
     list_display = ('name',)
     search_fields = ('name',)
+    inlines = [RecipeIngredientReadOnlyInline, ]
 
 class RecipeAdmin(admin.ModelAdmin):
     model = Recipe
 
     list_display = ('name',)
     search_fields = ('name',)
-    inlines = [RecipeIngredientInline, ]
+    inlines = [RecipeIngredientEditableInline, ]
 
 class RecipeIngredientAdmin(admin.ModelAdmin):
     model = RecipeIngredient

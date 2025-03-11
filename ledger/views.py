@@ -12,6 +12,7 @@ def recipe_list(request):
     recipes = Recipe.objects.all()
     return render(request, 'recipe_list.html', {'recipes': recipes})
 
+@login_required
 def detailed_recipe(request, recipe_num):
     '''
     This view generates the webpage that displays the necessary ingredients and quantities needed for the chosen recipe.

@@ -20,6 +20,7 @@ from django.urls import include, path
 urlpatterns = [
     path('ledger/', include('ledger.urls', namespace="ledger")),
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls'))
 ]
 
 # Changes name of admin site title and header for personalization.

@@ -7,6 +7,9 @@ class Profile(models.Model):
     name = models.CharField(max_length=50)
     bio = models.CharField(max_length=255)
 
+    def __str__(self):
+        return self.name
+
 class Ingredient(models.Model):
     name = models.CharField(max_length=255)
 
@@ -15,7 +18,7 @@ class Ingredient(models.Model):
 
 class Recipe(models.Model):
     name = models.CharField(max_length=255)
-    author = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, related_name="author")
+    author = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, related_name="recipe_author")
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
@@ -26,6 +29,6 @@ class Recipe(models.Model):
         return reverse('ledger:recipe', args=[str(self.id)])
 
 class RecipeIngredient(models.Model):
-    quantity = models.CharField(max_length=255)
-    ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, related_name='recipe')
-    recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='ingredients')
+    Quantity = models.CharField(max_length=255)
+    Ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE, related_name='recipe')
+    Recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='ingredients')

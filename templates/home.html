@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<body>
+    <h1> Welcome to the RecipeBook Project! </h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+</body>

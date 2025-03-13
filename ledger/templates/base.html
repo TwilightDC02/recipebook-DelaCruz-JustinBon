@@ -6,14 +6,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title> 
+    <style>
+        body{
+            width: 100vw;
+            padding: 0;
+            margin: 0;
+        }
+        header{
+            display: flex;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+            background-color: rgb(67, 179, 67);
+            height: 7vh;
+            width: 100vw;
+        }
+        nav{
+            display: grid;
+            grid-template-columns: repeat(11, 1fr);
+            width: 100vw;
+        }
+        nav > h1{
+            margin: 0;
+            padding-left: 1em;
+            align-self: center;
+            justify-items: center;
+            grid-column: 1 / 4;
+        }
+        nav > form{
+            align-self: center;
+            justify-self: center;
+            grid-column: 11;
+        }
+        .content{
+            padding-left: 2em;
+        }
+    </style>
 </head>
-
 <body>
-
+    <header>
+        <nav>
+            <h1> Recipe Book </h1>
+            <form method="POST" action="{% url 'logout' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Logout</button>
+            </form>
+        </nav>
+    </header>
     <div class="content">
         {% block content %}{% endblock %}
     </div>
-
 </body>
-
 </html>

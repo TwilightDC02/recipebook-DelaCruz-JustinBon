@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <body>
     <h1> Welcome to the RecipeBook Project! </h1>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Login</button>
-    </form>
+    {% if user.is_authenticated %}
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Logout</button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}"> Please Login. </a>
+    {% endif %}
+    <h2> Apps: </h2>
+    <ul>
+        <li>
+            <a href="{% url 'ledger:recipe_list' %}"> Ledger </a>
+        </li>
+    </ul>
 </body>

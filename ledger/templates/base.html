@@ -1,7 +1,6 @@
 <!-- This html file serves as the template file for the ledger app. -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,6 +31,13 @@
             align-self: center;
             justify-items: center;
             grid-column: 1 / 4;
+        }
+        nav > h1 > a{
+            text-decoration: none;
+            color: black;
+        }
+        nav > h1 > a:hover{
+            text-decoration: underline;
         }
         nav > form{
             align-self: center;
@@ -68,7 +74,7 @@
 <body>
     <header>
         <nav>
-            <h1> Recipe Book </h1>
+            <h1> <a href="{% url 'ledger:recipe_list' %}"> Recipe Book </a></h1>
             <form method="POST" action="{% url 'logout' %}">
                 {% csrf_token %}
                 {{ form.as_p }}

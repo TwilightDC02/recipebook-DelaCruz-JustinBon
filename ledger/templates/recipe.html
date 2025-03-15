@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
 {% block title %} Recipe Book : {{recipe.name}} {% endblock %}
 {% block content %}
-    <h2> {{recipe.name}} </h2>
+    <h2> Recipe: {{recipe.name}} </h2>
     <h3> Created by: {{recipe.author}}</h3>
     <ul>
         {% for ingredients in recipe.ingredients.all %}

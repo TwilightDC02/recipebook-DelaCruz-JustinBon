@@ -16,10 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from .views import home
 
 urlpatterns = [
     path('ledger/', include('ledger.urls', namespace="ledger")),
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('home/', home, name="home" ),
 ]
 
 # Changes name of admin site title and header for personalization.

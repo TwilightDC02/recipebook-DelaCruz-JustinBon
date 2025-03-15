@@ -31,9 +31,15 @@ class RecipeAdmin(admin.ModelAdmin):
 class RecipeIngredientAdmin(admin.ModelAdmin):
     model = RecipeIngredient
 
-    list_display = ('Recipe', 'Ingredient', 'Quantity')
+    list_display = ('Recipe', 'Ingredient', 'Quantity',)
     list_filter = ('Recipe', 'Ingredient', )
+
+class ProfileAdmin(admin.ModelAdmin):
+    model = Profile
+
+    list_display = ('user', 'name', 'bio',)
 
 admin.site.register(Ingredient, IngredientAdmin)
 admin.site.register(Recipe, RecipeAdmin)
 admin.site.register(RecipeIngredient, RecipeIngredientAdmin)
+admin.site.register(Profile, ProfileAdmin)

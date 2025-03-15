@@ -38,6 +38,28 @@
             justify-self: center;
             grid-column: 11;
         }
+        nav > form > button{
+            background-color: black;
+            color: white;
+            width: 5rem;
+            height: 2rem;
+            border-radius: 0.5em;
+            border: none;
+        }
+        nav > form > button:hover{
+            background-color: rgb(67, 67, 67);
+        }
+        nav > a{
+            color: black;
+            text-decoration: none;
+            align-self: center;
+            justify-self: center;
+            grid-row: 1;
+            grid-column: 9;
+        }
+        nav > a:hover{
+            text-decoration: underline;
+        }
         .content{
             padding-left: 2em;
         }
@@ -52,6 +74,7 @@
                 {{ form.as_p }}
                 <button type="submit">Logout</button>
             </form>
+            <a href="{% url 'home' %}"> Home </a>
         </nav>
     </header>
     <div class="content">

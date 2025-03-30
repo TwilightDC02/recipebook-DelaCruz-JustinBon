@@ -10,6 +10,9 @@ class RecipeIngredientReadOnlyInline(admin.TabularInline):
 class RecipeIngredientEditableInline(admin.TabularInline):
     model = RecipeIngredient
 
+class RecipeImageInLine(admin.TabularInline):
+    model = RecipeImage
+
 class IngredientAdmin(admin.ModelAdmin):
     model = Ingredient
 
@@ -26,7 +29,7 @@ class RecipeAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
     # Allows for admin to modify the recipes by adding/deleting ingredients.
-    inlines = [RecipeIngredientEditableInline, ]
+    inlines = [RecipeIngredientEditableInline, RecipeImageInLine]
 
 class RecipeIngredientAdmin(admin.ModelAdmin):
     model = RecipeIngredient

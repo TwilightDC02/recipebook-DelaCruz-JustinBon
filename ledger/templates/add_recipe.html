@@ -4,7 +4,11 @@
 {% block content %}
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        <h2> Add Recipe </h2>
+        {{ add_recipe_form.as_p }}
+
+        <h3> Ingredients </h3>
+        {{ ingredients_formset.as_table }}
         <button type="Submit"> Submit </button>
     </form>
 {% endblock %}

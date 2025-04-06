@@ -50,3 +50,19 @@ def add_recipe(request):
     image_formset = RecipeImageFormset()
 
     return render(request, 'add_recipe.html', {'add_recipe_form': recipe_form, 'new_ingredient_form': ingredient_form, 'ingredients_formset': ingredients_formset, 'image_formset': image_formset})
+
+@login_required
+def add_image(request, recipe_num):
+    recipe = Recipe.objects.get(id=recipe_num)
+    if request.method == "POST":
+        image_formset = RecipeImageFormset(request.POST, request.FILES)
+
+        if image_formset.is_valid():
+            image_formset.instance = recipe 
+            image_formset.save()
+
+            return redirect('ledger:recipe', recipe_num)
+    
+    image_formset = RecipeImageFormset()
+
+    return render(request, 'add_image.html', {'image_formset': image_formset, 'recipe': recipe})

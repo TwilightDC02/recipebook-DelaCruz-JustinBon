@@ -1,0 +1,10 @@
+<!-- This file is an extension of the base.html file. This serves as the page where users can add new images to their chosen recipe. -->
+{% extends 'base.html' %}
+{% block title %} Add Image {% endblock %}
+{% block content %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ image_formset.as_p}}
+        <button type="Submit"> Add Image </button>
+    </form>
+{% endblock %}

@@ -3,6 +3,7 @@
 {% block title %} Recipe Book : {{recipe.name}} {% endblock %}
 {% block content %}
     <h2> Recipe: {{recipe.name}} </h2>
+    <a href="{% url 'ledger:add_image' recipe.id %}">Add Image</a>
     <div class="recipe-images">
         {% for image in recipe.images.all %}
         <img src="{{image.image.url}}" alt="{{image.description}}">

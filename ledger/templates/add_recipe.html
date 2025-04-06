@@ -4,17 +4,24 @@
 {% block content %}
     <form method="post">
         {% csrf_token %}
-        <h2> Add Recipe </h2>
-        {{ add_recipe_form.as_p }}
-        
-        <h3> Ingredients </h3>
-        {{ ingredients_formset.as_table }}
-        <button type="Submit" name="add_recipe"> Submit </button>
+        <div>
+            <h2> Add Recipe <span>*</span> </h2>
+            {{ add_recipe_form.as_p }}
+            {{ image_formset.as_p }}
+        </div>
+        <h3> Ingredients <span>*</span> </h3>
+        {% for form in ingredients_formset %}
+        <div>
+            {{ form.Quantity.label_tag }} {{ form.Quantity }}
+            {{ form.Ingredient.label_tag }} {{ form.Ingredient }}    
+        </div>
+        {% endfor %}
+        <button type="Submit" name="add_recipe"> Add Recipe </button>
     </form>
     <form method="post">
         {% csrf_token %}    
         <h4> Create New Ingredients </h4>
         {{ new_ingredient_form.as_p }}
-        <button type="Submit" name="add_ingredients"> Add </button>
+        <button type="Submit" name="add_ingredients"> Add Ingredient </button>
     </form>
 {% endblock %}

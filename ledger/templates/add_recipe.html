@@ -6,9 +6,15 @@
         {% csrf_token %}
         <h2> Add Recipe </h2>
         {{ add_recipe_form.as_p }}
-
+        
         <h3> Ingredients </h3>
         {{ ingredients_formset.as_table }}
-        <button type="Submit"> Submit </button>
+        <button type="Submit" name="add_recipe"> Submit </button>
+    </form>
+    <form method="post">
+        {% csrf_token %}    
+        <h4> Create New Ingredients </h4>
+        {{ new_ingredient_form.as_p }}
+        <button type="Submit" name="add_ingredients"> Add </button>
     </form>
 {% endblock %}

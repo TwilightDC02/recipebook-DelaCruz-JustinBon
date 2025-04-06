@@ -25,7 +25,7 @@ class IngredientAdmin(admin.ModelAdmin):
 class RecipeAdmin(admin.ModelAdmin):
     model = Recipe
 
-    list_display = ('name',)
+    list_display = ('name', 'created_on', 'updated_on')
     search_fields = ('name',)
 
     # Allows for admin to modify the recipes by adding/deleting ingredients.

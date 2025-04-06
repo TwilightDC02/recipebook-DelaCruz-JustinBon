@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Profile, Recipe, RecipeImage
-from .forms import RecipeForm, RecipeIngredientFormset, IngredientForm
+from .forms import RecipeForm, RecipeIngredientFormset, IngredientForm, RecipeImageFormset
 
 @login_required
 def recipe_list(request):
@@ -24,25 +24,29 @@ def detailed_recipe(request, recipe_num):
 @login_required
 def add_recipe(request):
     if request.method == "POST":
-        form = RecipeForm(request.POST)
-        form_2 = IngredientForm(request.POST)
-        formset = RecipeIngredientFormset(request.POST)
+        recipe_form = RecipeForm(request.POST)
+        ingredient_form = IngredientForm(request.POST)
+        ingredients_formset = RecipeIngredientFormset(request.POST)
+        image_formset = RecipeImageFormset(request.POST)
 
         if 'add_ingredients' in request.POST:
-            form_2.save()
+            ingredient_form.save()
             return redirect('ledger:add_recipe')
 
-        elif form.is_valid() and formset.is_valid():
-            recipe = form.save(commit=False)
+        elif 'add_recipe' in request.POST and recipe_form.is_valid() and ingredients_formset.is_valid() and image_formset.is_valid():
+            recipe = recipe_form.save(commit=False)
             recipe.author = request.user.profile
-            form.save()
-            formset.instance = recipe
-            formset.save()
+            recipe_form.save()
+            ingredients_formset.instance = recipe
+            image_formset.instance = recipe
+            ingredients_formset.save()
+            image_formset.save()
 
             return redirect('ledger:add_recipe')
         
-    form = RecipeForm()
-    form_2 = IngredientForm()
-    formset = RecipeIngredientFormset()
+    recipe_form = RecipeForm()
+    ingredient_form = IngredientForm()
+    ingredients_formset = RecipeIngredientFormset()
+    image_formset = RecipeImageFormset()
 
-    return render(request, 'add_recipe.html', {'add_recipe_form': form, 'new_ingredient_form': form_2, 'ingredients_formset': formset})
+    return render(request, 'add_recipe.html', {'add_recipe_form': recipe_form, 'new_ingredient_form': ingredient_form, 'ingredients_formset': ingredients_formset, 'image_formset': image_formset})

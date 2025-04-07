@@ -27,27 +27,39 @@ def add_recipe(request):
         recipe_form = RecipeForm(request.POST)
         ingredient_form = IngredientForm(request.POST)
         ingredients_formset = RecipeIngredientFormset(request.POST)
-        image_formset = RecipeImageFormset(request.POST)
+        image_formset = RecipeImageFormset(request.POST, request.FILES)
 
         if 'add_ingredients' in request.POST:
             ingredient_form.save()
             return redirect('ledger:add_recipe')
 
-        elif 'add_recipe' in request.POST and recipe_form.is_valid() and ingredients_formset.is_valid() and image_formset.is_valid():
+        elif 'add_recipe' in request.POST:
             recipe = recipe_form.save(commit=False)
-            recipe.author = request.user.profile
-            recipe_form.save()
             ingredients_formset.instance = recipe
             image_formset.instance = recipe
-            ingredients_formset.save()
-            image_formset.save()
+            if  recipe_form.is_valid() and ingredients_formset.is_valid() and image_formset.is_valid():
+                print("validated")
+                recipe.author = request.user.profile
+                recipe.save()
+                ingredients_formset.save()
+                image_formset.save()
 
-            return redirect('ledger:add_recipe')
-        
+                return redirect('ledger:add_recipe')
+            else:
+                print("Recipe form errors:", recipe_form.errors)
+                print("Ingredients formset errors:", ingredients_formset.errors)
+                print("Image formset errors:", image_formset.errors)
+                print(image_formset.is_valid())
+                print(recipe_form.is_valid())
+                print(ingredients_formset.is_valid())
+                for form in ingredients_formset:
+                    print(form.errors)
+    
+    empty_recipe = Recipe()
     recipe_form = RecipeForm()
     ingredient_form = IngredientForm()
-    ingredients_formset = RecipeIngredientFormset()
-    image_formset = RecipeImageFormset()
+    ingredients_formset = RecipeIngredientFormset(instance=empty_recipe)
+    image_formset = RecipeImageFormset(instance=empty_recipe)
 
     return render(request, 'add_recipe.html', {'add_recipe_form': recipe_form, 'new_ingredient_form': ingredient_form, 'ingredients_formset': ingredients_formset, 'image_formset': image_formset})
 

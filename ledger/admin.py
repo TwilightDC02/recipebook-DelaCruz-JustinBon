@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import *
+from .models import Recipe, Ingredient, RecipeIngredient, RecipeImage, Profile
 
 class RecipeIngredientReadOnlyInline(admin.TabularInline):
     model = RecipeIngredient

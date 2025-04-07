@@ -22,5 +22,12 @@ class RecipeImageForm(forms.ModelForm):
         model = RecipeImage
         fields = '__all__'
 
-RecipeIngredientFormset = inlineformset_factory(Recipe, RecipeIngredient, RecipeIngredientForm, can_delete=False)
-RecipeImageFormset = inlineformset_factory(Recipe, RecipeImage, RecipeImageForm, can_delete=False, extra=2)
+class RequiredFormset(forms.BaseInlineFormSet):
+    def __init__(self, *args, **kwargs):
+        super(RequiredFormset, self).__init__(*args,**kwargs)
+        for form in self.forms:
+            form.empty_permitted = False
+
+RecipeIngredientFormset = inlineformset_factory(Recipe, RecipeIngredient, RecipeIngredientForm, formset=RequiredFormset, can_delete=True, extra=5)
+
+RecipeImageFormset = inlineformset_factory(Recipe, RecipeImage, RecipeImageForm,formset=RequiredFormset, can_delete=False, extra=1)

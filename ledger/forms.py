@@ -16,18 +16,20 @@ class RecipeIngredientForm(forms.ModelForm):
     class Meta:
         model = RecipeIngredient
         fields = ['Quantity', 'Ingredient']
+        widgets = {
+            'Quantity': forms.TextInput(attrs={'required': True}),
+            'Ingredient': forms.Select(attrs={'required': True})
+        }
 
 class RecipeImageForm(forms.ModelForm):
     class Meta:
         model = RecipeImage
-        fields = '__all__'
+        fields = ['image', 'description']
+        widgets = {
+            'image': forms.ClearableFileInput(attrs={'required': True}),
+            'description': forms.Textarea(attrs={'required': True})
+        }
 
-class RequiredFormset(forms.BaseInlineFormSet):
-    def __init__(self, *args, **kwargs):
-        super(RequiredFormset, self).__init__(*args,**kwargs)
-        for form in self.forms:
-            form.empty_permitted = False
+RecipeIngredientFormset = inlineformset_factory(Recipe, RecipeIngredient, RecipeIngredientForm, can_delete=True, extra=5)
 
-RecipeIngredientFormset = inlineformset_factory(Recipe, RecipeIngredient, RecipeIngredientForm, formset=RequiredFormset, can_delete=True, extra=5)
-
-RecipeImageFormset = inlineformset_factory(Recipe, RecipeImage, RecipeImageForm,formset=RequiredFormset, can_delete=False, extra=1)
+RecipeImageFormset = inlineformset_factory(Recipe, RecipeImage, RecipeImageForm, can_delete=False, extra=1)

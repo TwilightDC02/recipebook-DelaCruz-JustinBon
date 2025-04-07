@@ -3,6 +3,7 @@
 {% block title %} Recipe Book Menu {% endblock %}
 {% block content %}
     <h2> List of Recipes by Bon's Friends </h2>
+    <a href="{% url 'ledger:add_recipe' %}"> Add Recipe </a>
     <ol>
         {% for recipe in recipes %}
             <li> <a href="{{ recipe.get_absolute_url }}"> {{ recipe }} </a> </li>

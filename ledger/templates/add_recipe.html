@@ -1,0 +1,24 @@
+<!-- This file is an extension of the base.html file. This serves as the page where users can create new recipes. -->
+{% extends 'base.html' %}
+{% block title %} Create a New Recipe {% endblock %}
+{% block content %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div>
+            <h2> Add Recipe <span>*</span> </h2>
+            {{ add_recipe_form.as_p }}
+            {{ image_formset.as_p }}
+        </div>
+        <h3> Ingredients <span>*</span> </h3>
+        <div>
+             {{ recipeingredients_formset.as_table }}
+        </div>
+        <button type="Submit" name="add_recipe"> Add Recipe </button>
+    </form>
+    <form method="post">
+        {% csrf_token %}    
+        <h4> Create New Ingredients </h4>
+        {{ new_ingredient_form.as_p }}
+        <button type="Submit" name="add_ingredients"> Add Ingredient </button>
+    </form>
+{% endblock %}

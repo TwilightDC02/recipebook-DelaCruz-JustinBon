@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import *
+from .models import Recipe, Ingredient, RecipeIngredient, RecipeImage, Profile
 
 class RecipeIngredientReadOnlyInline(admin.TabularInline):
     model = RecipeIngredient
@@ -10,6 +10,9 @@ class RecipeIngredientReadOnlyInline(admin.TabularInline):
 class RecipeIngredientEditableInline(admin.TabularInline):
     model = RecipeIngredient
 
+class RecipeImageInLine(admin.TabularInline):
+    model = RecipeImage
+
 class IngredientAdmin(admin.ModelAdmin):
     model = Ingredient
 
@@ -17,16 +20,16 @@ class IngredientAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     
     # Allows for admin to view which recipes require the chosen ingredient and how much is needed.
-    inlines = [RecipeIngredientReadOnlyInline, ]
+    inlines = [RecipeIngredientReadOnlyInline]
 
 class RecipeAdmin(admin.ModelAdmin):
     model = Recipe
 
-    list_display = ('name',)
+    list_display = ('name', 'created_on', 'updated_on')
     search_fields = ('name',)
 
-    # Allows for admin to modify the recipes by adding/deleting ingredients.
-    inlines = [RecipeIngredientEditableInline, ]
+    # Allows for admin to modify the recipes by adding/deleting ingredients and adding images.
+    inlines = [RecipeIngredientEditableInline, RecipeImageInLine]
 
 class RecipeIngredientAdmin(admin.ModelAdmin):
     model = RecipeIngredient

@@ -20,7 +20,7 @@ class IngredientAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     
     # Allows for admin to view which recipes require the chosen ingredient and how much is needed.
-    inlines = [RecipeIngredientReadOnlyInline, ]
+    inlines = [RecipeIngredientReadOnlyInline]
 
 class RecipeAdmin(admin.ModelAdmin):
     model = Recipe
@@ -28,7 +28,7 @@ class RecipeAdmin(admin.ModelAdmin):
     list_display = ('name', 'created_on', 'updated_on')
     search_fields = ('name',)
 
-    # Allows for admin to modify the recipes by adding/deleting ingredients.
+    # Allows for admin to modify the recipes by adding/deleting ingredients and adding images.
     inlines = [RecipeIngredientEditableInline, RecipeImageInLine]
 
 class RecipeIngredientAdmin(admin.ModelAdmin):

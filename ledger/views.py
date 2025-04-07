@@ -34,7 +34,7 @@ def add_recipe(request):
     if request.method == "POST":
         recipe_form = RecipeForm(request.POST)
         ingredient_form = IngredientForm(request.POST)
-        ingredients_formset = RecipeIngredientFormset(request.POST)
+        recipeingredients_formset = RecipeIngredientFormset(request.POST)
         image_formset = RecipeImageFormset(request.POST, request.FILES)
 
         # " '[name]' in request.POST " conditions correspond to the "name" attribute of the button in the html file.
@@ -46,25 +46,25 @@ def add_recipe(request):
         # to the newly made Recipe instance to add ingredients and image(s).
         elif 'add_recipe' in request.POST:
             recipe = recipe_form.save(commit=False)
-            ingredients_formset.instance = recipe
+            recipeingredients_formset.instance = recipe
             image_formset.instance = recipe
 
         # author is set by using the one-to-one relation of built-in user and profile model.
-            if  recipe_form.is_valid() and ingredients_formset.is_valid() and image_formset.is_valid():
+            if  recipe_form.is_valid() and recipeingredients_formset.is_valid() and image_formset.is_valid():
                 recipe.author = request.user.profile
                 recipe.save()
-                ingredients_formset.save()
+                recipeingredients_formset.save()
                 image_formset.save()
                 return redirect('ledger:add_recipe')
 
     recipe_form = RecipeForm()
     ingredient_form = IngredientForm()
-    ingredients_formset = RecipeIngredientFormset()
+    recipeingredients_formset = RecipeIngredientFormset()
     image_formset = RecipeImageFormset()
     return render(request, 'add_recipe.html', {
         'add_recipe_form': recipe_form, 
         'new_ingredient_form': ingredient_form, 
-        'ingredients_formset': ingredients_formset, 
+        'recipeingredients_formset': recipeingredients_formset, 
         'image_formset': image_formset
         })
 

@@ -2,7 +2,7 @@
 {% extends 'base.html' %}
 {% block title %} Create a New Recipe {% endblock %}
 {% block content %}
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div>
             <h2> Add Recipe <span>*</span> </h2>
@@ -10,12 +10,9 @@
             {{ image_formset.as_p }}
         </div>
         <h3> Ingredients <span>*</span> </h3>
-        {% for form in ingredients_formset %}
         <div>
-            {{ form.Quantity.label_tag }} {{ form.Quantity }}
-            {{ form.Ingredient.label_tag }} {{ form.Ingredient }}    
+             {{ ingredients_formset.as_table }}
         </div>
-        {% endfor %}
         <button type="Submit" name="add_recipe"> Add Recipe </button>
     </form>
     <form method="post">
